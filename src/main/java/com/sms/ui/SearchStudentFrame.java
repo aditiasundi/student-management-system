@@ -19,6 +19,7 @@ public class SearchStudentFrame extends JFrame {
         setTitle("Search Student");
         setSize(520,300);
         setLocationRelativeTo(null);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         initUI();
     }
 

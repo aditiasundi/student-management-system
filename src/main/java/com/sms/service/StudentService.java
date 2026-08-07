@@ -11,14 +11,22 @@ import java.util.List;
  * Service layer to coordinate validation and DAO operations.
  */
 public class StudentService {
-    private final StudentDAO dao = new StudentDAO();
+    private final StudentDAO dao;
+
+    public StudentService() {
+        this.dao = new StudentDAO();
+    }
+
+    public StudentService(StudentDAO dao) {
+        this.dao = dao;
+    }
 
     public void addStudent(Student s) throws Exception {
         // Validate
         if (!Validation.isNotEmpty(s.getStudentId()) || !Validation.isNotEmpty(s.getFullName()))
             throw new Exception("Student ID and Full Name are required");
-        if (!Validation.isValidEmail(s.getEmail())) throw new Exception("Invalid email");
-        if (!Validation.isValidPhone(s.getPhone())) throw new Exception("Invalid phone");
+        if (Validation.isNotEmpty(s.getEmail()) && !Validation.isValidEmail(s.getEmail())) throw new Exception("Invalid email");
+        if (Validation.isNotEmpty(s.getPhone()) && !Validation.isValidPhone(s.getPhone())) throw new Exception("Invalid phone");
         try {
             if (dao.existsById(s.getStudentId())) throw new Exception("Duplicate Student ID");
             if (!dao.insertStudent(s)) throw new Exception("Insert failed");
@@ -28,7 +36,10 @@ public class StudentService {
     }
 
     public void updateStudent(Student s) throws Exception {
-        if (!Validation.isNotEmpty(s.getStudentId())) throw new Exception("Student ID required");
+        if (!Validation.isNotEmpty(s.getStudentId()) || !Validation.isNotEmpty(s.getFullName()))
+            throw new Exception("Student ID and Full Name are required");
+        if (Validation.isNotEmpty(s.getEmail()) && !Validation.isValidEmail(s.getEmail())) throw new Exception("Invalid email");
+        if (Validation.isNotEmpty(s.getPhone()) && !Validation.isValidPhone(s.getPhone())) throw new Exception("Invalid phone");
         try {
             if (!dao.existsById(s.getStudentId())) throw new Exception("Student not found");
             if (!dao.updateStudent(s)) throw new Exception("Update failed");

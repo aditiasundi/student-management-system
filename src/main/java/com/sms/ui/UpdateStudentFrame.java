@@ -25,6 +25,7 @@ public class UpdateStudentFrame extends JFrame {
         setTitle("Update Student - " + studentId);
         setSize(520,420);
         setLocationRelativeTo(null);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         idField.setEditable(false);
         initUI();
         loadStudent(studentId);

@@ -23,6 +23,7 @@ public class ViewStudentsFrame extends JFrame {
         setTitle("View Students");
         setSize(900,520);
         setLocationRelativeTo(null);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         initUI();
         loadData();
     }
@@ -62,7 +63,7 @@ public class ViewStudentsFrame extends JFrame {
         TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
         table.setRowSorter(sorter);
         if (text==null || text.trim().isEmpty()) sorter.setRowFilter(null);
-        else sorter.setRowFilter(javax.swing.RowFilter.regexFilter("(?i)"+text));
+        else sorter.setRowFilter(javax.swing.RowFilter.regexFilter("(?i)" + java.util.regex.Pattern.quote(text)));
     }
 
     private void loadData() {
