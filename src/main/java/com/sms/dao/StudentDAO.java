@@ -3,6 +3,7 @@ package com.sms.dao;
 import com.sms.model.Student;
 
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +24,12 @@ public class StudentDAO {
             ps.setString(7, s.getGender());
             ps.setString(8, s.getDateOfBirth());
             ps.setString(9, s.getAddress());
-            ps.setTimestamp(10, Timestamp.valueOf(s.getCreatedAt()));
+            LocalDateTime createdAt = s.getCreatedAt();
+            if (createdAt == null) {
+                createdAt = LocalDateTime.now();
+                s.setCreatedAt(createdAt);
+            }
+            ps.setTimestamp(10, Timestamp.valueOf(createdAt));
             return ps.executeUpdate() > 0;
         }
     }

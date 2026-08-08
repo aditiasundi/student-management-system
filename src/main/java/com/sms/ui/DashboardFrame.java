@@ -5,6 +5,7 @@ import com.sms.service.StudentService;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * Dashboard showing statistics and navigation buttons.
@@ -63,7 +64,7 @@ public class DashboardFrame extends JFrame {
         return p;
     }
 
-    private JButton button(String text, AbstractAction action) {
+    private JButton button(String text, ActionListener action) {
         JButton b = new JButton(text);
         b.addActionListener(action);
         return b;

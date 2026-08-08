@@ -15,7 +15,7 @@ public class Student {
     private String gender;
     private String dateOfBirth;
     private String address;
-    private LocalDateTime createdAt;
+    private LocalDateTime createdAt = LocalDateTime.now();
 
     public Student() {}
 

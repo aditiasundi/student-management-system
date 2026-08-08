@@ -26,6 +26,7 @@ public class AddStudentFrame extends JFrame {
         setTitle("Add Student");
         setSize(520,420);
         setLocationRelativeTo(parent);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         initUI();
     }
 
